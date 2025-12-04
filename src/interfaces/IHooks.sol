@@ -6,7 +6,7 @@ import {BalanceDelta} from "../types/BalanceDelta.sol";
 import {ModifyLiquidityParams, SwapParams} from "../types/PoolOperation.sol";
 import {BeforeSwapDelta} from "../types/BeforeSwapDelta.sol";
 
-/// @notice V4 decides whether to invoke specific hooks by inspecting the least significant bits
+/// @notice V4 decides whether to invoke specific hooks by inspecting the least significant bits 
 /// of the address that the hooks contract is deployed to.
 /// For example, a hooks contract deployed to address: 0x0000000000000000000000000000000000002400
 /// has the lowest bits '10 0100 0000 0000' which would cause the 'before initialize' and 'after add liquidity' hooks to be used.
