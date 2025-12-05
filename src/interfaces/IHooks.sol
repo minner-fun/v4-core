@@ -96,10 +96,11 @@ interface IHooks {
     /// @param sender The initial msg.sender for the swap call
     /// @param key The key for the pool
     /// @param params The parameters for the swap
-    /// @param hookData Arbitrary data handed into the PoolManager by the swapper to be be passed on to the hook
-    /// @return bytes4 The function selector for the hook
-    /// @return BeforeSwapDelta The hook's delta in specified and unspecified currencies. Positive: the hook is owed/took currency, negative: the hook owes/sent currency
-    /// @return uint24 Optionally override the lp fee, only used if three conditions are met: 1. the Pool has a dynamic fee, 2. the value's 2nd highest bit is set (23rd bit, 0x400000), and 3. the value is less than or equal to the maximum fee (1 million)
+    /// @param hookData Arbitrary data handed into the PoolManager by the swapper to be be passed on to the hook 交换者传入的任意数据，被传递给钩子
+    /// @return bytes4 The function selector for the hook 钩子的函数选择器
+    /// @return BeforeSwapDelta The hook's delta in specified and unspecified currencies. Positive: the hook is owed/took currency, negative: the hook owes/sent currency 钩子的指定和未指定代币的delta，正数：钩子欠的钱，负数：钩子给的钱
+    /// @return uint24 Optionally override the lp fee, only used if three conditions are met: 1. the Pool has a dynamic fee, 2. the value's 2nd highest bit is set (23rd bit, 0x400000), and 3. the value is less than or equal to the maximum fee (1 million) 
+    ///               可选地覆盖lp费用，只有当三个条件都满足时才使用：1. 池有动态费用，2. 值的第二高位是设置的（23位，0x400000），3. 值小于或等于最大费用（1百万）
     function beforeSwap(address sender, PoolKey calldata key, SwapParams calldata params, bytes calldata hookData)
         external
         returns (bytes4, BeforeSwapDelta, uint24);
@@ -107,11 +108,11 @@ interface IHooks {
     /// @notice The hook called after a swap
     /// @param sender The initial msg.sender for the swap call
     /// @param key The key for the pool
-    /// @param params The parameters for the swap
-    /// @param delta The amount owed to the caller (positive) or owed to the pool (negative)
-    /// @param hookData Arbitrary data handed into the PoolManager by the swapper to be be passed on to the hook
-    /// @return bytes4 The function selector for the hook
-    /// @return int128 The hook's delta in unspecified currency. Positive: the hook is owed/took currency, negative: the hook owes/sent currency
+    /// @param params The parameters for the swap 交换参数
+    /// @param delta The amount owed to the caller (positive) or owed to the pool (negative) 调用者欠的钱（正数）或池欠的钱（负数）
+    /// @param hookData Arbitrary data handed into the PoolManager by the swapper to be be passed on to the hook 交换者传入的任意数据，被传递给钩子
+    /// @return bytes4 The function selector for the hook 钩子的函数选择器
+    /// @return int128 The hook's delta in unspecified currency. Positive: the hook is owed/took currency, negative: the hook owes/sent currency 钩子的未指定代币的delta，正数：钩子欠的钱，负数：钩子给的钱
     function afterSwap(
         address sender,
         PoolKey calldata key,
