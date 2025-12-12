@@ -1,5 +1,15 @@
+8.13版本引入的新特性
+一次声明，全局使用。
+
+## 概述
+
+`using ... for ... global` 是 Solidity 0.8.13+ 引入的特性，用于在整个项目范围内将库函数绑定到类型上。
+
+使用案例
+
+```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.0;
 
 import {Currency} from "./Currency.sol";
 import {IHooks} from "../interfaces/IHooks.sol";
@@ -22,3 +32,5 @@ struct PoolKey {
     /// @notice The hooks of the pool
     IHooks hooks;
 }
+
+```
