@@ -13,14 +13,17 @@ contract BeforeTest is Test{
 
     function test_BeforeSwapDelta() public {
         console.log("\n=== Test Case 1: Small values (1, 2) ===");
-        testCombination(1, 2);
+        // testCombination(1, 2);
         
+        BeforeSwapDelta res =  toBeforeSwapDelta(int128(1), int128(2));
+        console.log("res:", BeforeSwapDelta.unwrap(res));
         // console.log("\n\n=== Test Case 2: Larger values (255, 256) ===");
         // testCombination(255, 256);
         
         // console.log("\n\n=== Test Case 3: Max int128 values ===");
         // testCombination(type(int128).max, type(int128).max);
     }
+
     
     function testCombination(int128 deltaSpecified, int128 deltaUnspecified) internal {
         console.log("Input deltaSpecified (decimal):", uint128(deltaSpecified));
