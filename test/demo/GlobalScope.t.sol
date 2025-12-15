@@ -184,9 +184,9 @@ contract Test5_RealWorldPoolKey is Test {
         console.logBytes32(PoolId.unwrap(poolId));
         console.log("");
         console.log("This works because:");
-        console.log("  1. We imported PoolKey ✅");
-        console.log("  2. PoolKey.sol has 'global' declaration ✅");
-        console.log("  3. Therefore toId() is automatically available ✅");
+        // console.log("  1. We imported PoolKey ✅");
+        // console.log("  2. PoolKey.sol has 'global' declaration ✅");
+        // console.log("  3. Therefore toId() is automatically available ✅");
     }
 }
 
