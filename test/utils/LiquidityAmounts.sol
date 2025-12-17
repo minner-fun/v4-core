@@ -15,6 +15,7 @@ library LiquidityAmounts {
     }
 
     /// @notice Computes the amount of liquidity received for a given amount of token0 and price range
+    /// 根据提供的token0的数量和价格范围，计算出对应的流动性
     /// @dev Calculates amount0 * (sqrt(upper) * sqrt(lower)) / (sqrt(upper) - sqrt(lower))
     /// @param sqrtPriceAX96 A sqrt price representing the first tick boundary
     /// @param sqrtPriceBX96 A sqrt price representing the second tick boundary
