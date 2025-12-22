@@ -1,28 +1,31 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-/// @title Contains 512-bit math functions
+/// @title Contains 512-bit math functions 数学函数库
+/// @notice 提供可以处理中间值溢出256位时进行乘法和除法的数学函数
 /// @notice Facilitates multiplication and division that can have overflow of an intermediate value without any loss of precision
+/// @dev 处理"phantom overflow"，即允许在中间值溢出256位时进行乘法和除法
 /// @dev Handles "phantom overflow" i.e., allows multiplication and division where an intermediate value overflows 256 bits
 library FullMath {
     /// @notice Calculates floor(a×b÷denominator) with full precision. Throws if result overflows a uint256 or denominator == 0
-    /// @param a The multiplicand
-    /// @param b The multiplier
-    /// @param denominator The divisor
-    /// @return result The 256-bit result
+    /// @param a The multiplicand 被乘数
+    /// @param b The multiplier 乘数
+    /// @param denominator The divisor 除数
+    /// @return result The 256-bit result 结果
     /// @dev Credit to Remco Bloemen under MIT license https://xn--2-umb.com/21/muldiv
+    /// @dev 感谢Remco Bloemen在MIT许可证下的贡献 https://xn--2-umb.com/21/muldiv
     function mulDiv(uint256 a, uint256 b, uint256 denominator) internal pure returns (uint256 result) {
         unchecked {
-            // 512-bit multiply [prod1 prod0] = a * b
-            // Compute the product mod 2**256 and mod 2**256 - 1
-            // then use the Chinese Remainder Theorem to reconstruct
-            // the 512 bit result. The result is stored in two 256
+            // 512-bit multiply [prod1 prod0] = a * b 512位乘法 [prod1 prod0] = a * b
+            // Compute the product mod 2**256 and mod 2**256 - 1 计算产品模2**256和模2**256 - 1
+            // then use the Chinese Remainder Theorem to reconstruct 然后使用中国剩余定理重构
+            // the 512 bit result. The result is stored in two 256 512位结果。结果存储在两个256位变量中，使得产品 = prod1 * 2**256 + prod0
             // variables such that product = prod1 * 2**256 + prod0
-            uint256 prod0 = a * b; // Least significant 256 bits of the product
-            uint256 prod1; // Most significant 256 bits of the product
+            uint256 prod0 = a * b; // Least significant 256 bits of the product 产品最低256位
+            uint256 prod1; // Most significant 256 bits of the product 产品最高256位
             assembly ("memory-safe") {
-                let mm := mulmod(a, b, not(0))
-                prod1 := sub(sub(mm, prod0), lt(mm, prod0))
+                let mm := mulmod(a, b, not(0)) // 计算产品模2**256和模2**256 - 1
+                prod1 := sub(sub(mm, prod0), lt(mm, prod0)) // 计算产品模2**256和模2**256 - 1
             }
 
             // Make sure the result is less than 2**256.
